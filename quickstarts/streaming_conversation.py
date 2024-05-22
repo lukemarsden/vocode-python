@@ -2,6 +2,7 @@ import asyncio
 import logging
 import signal
 from dotenv import load_dotenv
+import os
 
 
 load_dotenv()
@@ -46,8 +47,8 @@ async def main():
                 prompt_preamble="""The AI is having a pleasant conversation about life""",
             )
         ),
-        synthesizer=AzureSynthesizer(
-            AzureSynthesizerConfig.from_output_device(speaker_output)
+        synthesizer=ElevenLabsSynthesizer(
+            ElevenLabsSynthesizerConfig.from_output_device(speaker_output, api_key=os.getenv("ELEVEN_API_KEY"), voice_id="iDEmt5MnqUotdwCIVplo")
         ),
         logger=logger,
     )

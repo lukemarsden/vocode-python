@@ -43,7 +43,7 @@ class ChatGPTAgent(RespondAgent[ChatGPTAgentConfig]):
             openai.api_key = getenv("AZURE_OPENAI_API_KEY")
         else:
             openai.api_type = "open_ai"
-            openai.api_base = "https://api.openai.com/v1"
+            openai.api_base = "https://app.tryhelix.ai/v1"
             openai.api_version = None
             openai.api_key = openai_api_key or getenv("OPENAI_API_KEY")
         if not openai.api_key:
@@ -90,6 +90,8 @@ class ChatGPTAgent(RespondAgent[ChatGPTAgentConfig]):
 
         if use_functions and self.functions:
             parameters["functions"] = self.functions
+
+        parameters["model"] = "llama3:instruct"
 
         return parameters
 
